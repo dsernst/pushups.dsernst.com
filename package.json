@@ -1,0 +1,11 @@
+{
+  "name": "pushups.dsernst.com",
+  "version": "1.0.0",
+  "description": "Simple full-screen pushup counter, easy to tap, even with your nose",
+  "license": "ISC",
+  "author": "dsernst",
+  "main": "index.html",
+  "scripts": {
+    "dev": "open index.html"
+  }
+}
