@@ -2,6 +2,8 @@
 
 A simple full-screen pushup counter designed to be easy to count, even with your nose. Tap anywhere on the screen to increment.
 
+<img src="./screenshot.png" width="400px" />
+
 ## Usage
 
 - **Tap** anywhere on the screen to add one to the count
