@@ -78,15 +78,20 @@
       let lastPress = 0
       let audioCtx = null
 
-      function playCoin() {
+      const COIN_LOW = [
+        { freq: 783.99, at: 0, dur: 0.08, vol: 0.25 },
+        { freq: 1046.5, at: 0.05, dur: 0.35, vol: 0.2 },
+      ]
+      const COIN_HIGH = [
+        { freq: 987.77, at: 0, dur: 0.08, vol: 0.25 },
+        { freq: 1318.51, at: 0.05, dur: 0.35, vol: 0.2 },
+      ]
+
+      function playCoin(milestone) {
         if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)()
         if (audioCtx.state === 'suspended') audioCtx.resume()
         const t = audioCtx.currentTime
-        // Mario-ish coin: B5 blip then E6 ring (square wave + quick decay)
-        ;[
-          { freq: 987.77, at: 0, dur: 0.08, vol: 0.25 },
-          { freq: 1318.51, at: 0.05, dur: 0.35, vol: 0.2 },
-        ].forEach(({ freq, at, dur, vol }) => {
+        ;(milestone ? COIN_HIGH : COIN_LOW).forEach(({ freq, at, dur, vol }) => {
           const osc = audioCtx.createOscillator()
           const gain = audioCtx.createGain()
           osc.type = 'square'
@@ -105,7 +110,7 @@
         lastPress = now
         count++
         document.getElementById('count').textContent = count
-        playCoin()
+        playCoin(count % 10 === 0)
       }
 
       function reset(e) {
